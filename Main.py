@@ -12,12 +12,10 @@ import os
 # Load the dataset
 # Make sure the dataset is in the same directory or provide the full path to the dataset
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-df = pd.read_csv('TOP100IMDBMOVIES2.csv')
 df = pd.read_csv('World Bank.CSV')
 
 # 1. Data Exploration
 # Display the first few rows of the dataset to get an overview
-print("First 5 rows of the dataset:\n", df.head())
 print("First row of the dataset:\n", df.head())
 
 # Display summary statistics for numerical columns
@@ -26,13 +24,6 @@ print("\nSummary statistics:\n", df.describe())
 # Check for missing values in the dataset
 print("\nMissing values:\n", df.isnull().sum())
 
-# 2. Data Visualization: Correlation heatmap
-# Visualize the correlation between numerical variables using a heatmap
-plt.figure(figsize=(10, 8))
-numeric_df = df.select_dtypes(include=[np.number])
-corr = numeric_df.corr()
-sns.heatmap(corr, annot=True, cmap='coolwarm', linewidths=0.5)
-plt.title('Correlation Heatmap')
 # 2. Data Visualization: Clustered Column
 # Visualize the Sum of Unemployed Rate (%) by Country using a Clustered Column
 Unemployment_by_country = df.groupby('Country')['Unemployment Rate (%)'].sum()
@@ -54,16 +45,11 @@ plt.ylabel('CO2 Emissions (metric tons per capita)')
 plt.title('GDP vs CO2')
 plt.show()
 
-# Visualization: Distribution of App Usage Time based on User Behavior Class
-# This helps to understand how app usage varies between different user behavior classes
 # Visualization: Distribution of Access to Electricity by country
 plt.figure(figsize=(8, 6))
-sns.boxplot(x='User Behavior Class', y='App Usage Time (min/day)', data=df)
-plt.title('App Usage Time Distribution by User Behavior Class')
 sns.boxplot(x='Access to Electricity (%)', y='Country', data=df)
 plt.title('Access to Electricity by country')
 plt.show()
-
 
 # 3. Data Preprocessing
 # Convert categorical columns (Operating System, Gender) into numeric values using Label Encoding
